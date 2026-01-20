@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
     const { password: _, ...userWithoutPassword } = user.toObject();
     res.status(201).json(userWithoutPassword);
   } catch (error) {
+    console.log('Register error:', error.message);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -43,6 +44,7 @@ router.post('/login', async (req, res) => {
     const { password: _, ...userWithoutPassword } = user.toObject();
     res.json({ token, user: userWithoutPassword });
   } catch (error) {
+    console.log('Login error:', error.message);
     res.status(500).json({ message: 'Server error' });
   }
 });
