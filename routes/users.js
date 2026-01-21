@@ -5,13 +5,17 @@ const jwt = require('jsonwebtoken');
 
 // Note to self: Tia, this is the registration endpoint
 router.post('/register', async (req, res) => {
+  console.log('Register route hit');
+  console.log('req.body:', req.body);
   const { username, email, password } = req.body;
   try {
+
     // Note to self: Tia, check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
+const existingUser = await User.findOne({ email });
+if (existingUser) {
+  return res.status(400).json({ message: 'User already exists' });
+}
+console.log('Creating user:', username, email);
     // Note to self: Tia, create new user, password will be hashed by pre-save hook
     const user = new User({ username, email, password });
     await user.save();
